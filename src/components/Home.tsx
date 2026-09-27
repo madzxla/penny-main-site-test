@@ -1,20 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import "./VideoScrub.css";
+import Logo from "../assets/logo.png";
+import RigaVideo from "../assets/riga.mp4";
+import "./Home.css";
 
 const SCRUB_DISTANCE = 2400;
 const ZOOM_DISTANCE = 900;
 const ZOOM_AMOUNT = 0.15;
 const ZOOM_MAX_RADIUS = 28;
-
-const captions = [
-  { start: 0, end: 0.3, text: "Someone's walking toward a partner restaurant" },
-  { start: 0.3, end: 0.6, text: "They're now close enough to trigger a deal" },
-  { start: 0.6, end: 1, text: "Penny surfaces it automatically" },
-];
-
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value));
-}
 
 export default function VideoScrub() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -22,8 +14,23 @@ export default function VideoScrub() {
   const pinRef = useRef<HTMLDivElement>(null);
 
   const [videoProgress, setVideoProgress] = useState(0);
-  const [zoomProgress, setZoomProgress] = useState(0); // Kept in case you need it in JSX
+  const [, setZoomProgress] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  const supportLines = [
+    { start: 0, end: 0.45, text: "Bezmaksas ēdiens un piedāvājumi ēdienam" },
+    { start: 0.45, end: 0.8, text: "Tikai no vislabākajām vietām Rīgā" },
+    { start: 0.8, end: 2, text: "Lejupielādē Penny tagad" },
+  ];
+
+  const activeSupportLine =
+    supportLines.find(
+      (line) =>
+        videoProgress >= line.start &&
+        videoProgress < line.end
+    ) ?? supportLines[supportLines.length - 1];
+
+  const activeSupportText = activeSupportLine.text;
 
   const durationRef = useRef(0);
   const readyRef = useRef(false);
@@ -157,11 +164,19 @@ export default function VideoScrub() {
 
   return (
     <>
-      <section className="scrub-intro">
-        <h1>Variant B — Native Sticky Scroll.</h1>
-        <p>No scroll hijacking, pure CSS `position: sticky`.</p>
-        <div className="scrub-hint">↓ scroll down</div>
-      </section>
+      <header className="topbar">
+        <div className="topbar-inner">
+          <div className="brand-wrap">
+            <img src={Logo} alt="Penny logo" className="brand-logo" />
+          </div>
+
+          <nav className="topnav" aria-label="Main navigation">
+            <a href="#partners">Partneri</a>
+            <a href="#deals">Piedāvājumi</a>
+            <a href="#download" className="nav-cta">Lejupielādē</a>
+          </nav>
+        </div>
+      </header>
 
       {/* 
         The stage defines the total scrollable distance. 
@@ -198,52 +213,48 @@ export default function VideoScrub() {
           >
             <video
               ref={videoRef}
-              src="https://assets.mixkit.co/videos/4600/4600-360.mp4"
+              src={RigaVideo}
               muted
               playsInline
               preload="auto"
             />
 
+            <div className="video-overlay" />
             <div className="video-gradient" />
 
-            {captions.map((caption) => {
-              const active = videoProgress >= caption.start && videoProgress < caption.end;
-              return (
-                <div
-                  key={caption.text}
-                  className={`caption ${active ? "active" : ""}`}
-                >
-                  {caption.text}
-                </div>
-              );
-            })}
+            <div className="video-copy">
+              <h1>Labs ēdiens, tieši aiz stūra</h1>
+              <p
+                key={activeSupportText}
+                className="support-line"
+              >
+                {activeSupportText === supportLines[2].text ? (
+                  <>
+                    <span>Lejupielādē</span>
+                    <img
+                      src={Logo}
+                      alt="Penny logo"
+                      className="support-logo"
+                    />
+                    <span>tagad</span>
+                  </>
+                ) : (
+                  activeSupportText
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="scroll-spacer" />
 
-      <div className="progress-track">
-        <div
-          className="progress-fill"
-          style={{ height: `${videoProgress * 100}%` }}
-        />
-      </div>
-
       <div className={`loading-note ${loading ? "show" : ""}`}>
         buffering video…
       </div>
-
-      <section className="scrub-outro">
-        <h2>The extra beat</h2>
-        <p>
-          At <code>progress === 1</code>, the video is done, but the layout remains sticky. Continued scrolling shrinks the frame before normal scrolling resumes.
-        </p>
-      </section>
       
       {/* Extra space just to allow scrolling down at the end */}
-      <section className="scrub-outro"><p>Keep scrolling...</p></section>
-      <section className="scrub-outro"><p>End of page.</p></section>
+      <section className="scrub-outro"><p>Būsim klāt jau ļoti drīz.</p></section>
     </>
   );
 }

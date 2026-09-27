@@ -1,4 +1,4 @@
-import VideoScrub from "./components/VideoScrub";
+import VideoScrub from "./components/Home";
 
 function App() {
   return (
