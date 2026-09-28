@@ -668,7 +668,7 @@ body.scrub-locked .pin {
 
 .cs-card {
   flex: 0 0 var(--cs-card-w);
-  height: 570px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1273,6 +1273,27 @@ body.scrub-locked .pin {
 
 .home-download-copy {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-download-copy h1.cs-heading {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 0;
+  text-align: center;
+}
+
+.home-download-copy a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-download-copy a img {
+  display: block;
+  margin: 0 auto;
 }
 
 .home-download-kicker {
