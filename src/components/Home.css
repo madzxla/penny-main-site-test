@@ -956,7 +956,11 @@ body.scrub-locked .pin {
   align-items: flex-end;
   height: 170px;
   padding: 14px;
-  background: linear-gradient(135deg, #ffb37a, var(--cs-accent));
+  background-color: var(--cs-accent);
+  background-image: linear-gradient(135deg, #ffb47a3f, var(--cs-accent));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .cs-badge {

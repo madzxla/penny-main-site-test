@@ -59,7 +59,15 @@ function MapVisual() {
 function DealVisual() {
   return (
     <Phone>
-      <div className="cs-deal-hero">
+      <div
+        className="cs-deal-hero"
+        style={{
+          backgroundImage: DEAL_IMAGE,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <span className="cs-badge">Bezmaksas</span>
       </div>
       <div className="cs-deal-body">
@@ -151,6 +159,8 @@ const STEPS: { caption: string; visual: ReactNode }[] = [
 ];
 
 const LAST = STEPS.length - 1;
+const DEAL_IMAGE =
+  "linear-gradient(135deg, rgba(255, 180, 122, 0.44), rgba(232,52,78,0.44)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80')";
 
 /* ---------- Component ---------- */
 
