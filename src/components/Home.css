@@ -636,6 +636,7 @@ body.scrub-locked .pin {
 .cs-heading {
   margin: 0 0 40px;
   font-family: var(--font-heading);
+  color:#000000;
   padding: 0 var(--cs-gutter);
   font-size: clamp(42px, 4vw, 48px);
   line-height: 1.1;
@@ -667,7 +668,7 @@ body.scrub-locked .pin {
 
 .cs-card {
   flex: 0 0 var(--cs-card-w);
-  height: 530px;
+  height: 570px;
   display: flex;
   flex-direction: column;
   align-items: center;
