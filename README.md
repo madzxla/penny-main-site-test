@@ -30,3 +30,7 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Markdown for agents
+
+Cloudflare Pages negotiates the homepage representation in `functions/index.ts`: requests with `Accept: text/markdown` receive `public/index.md`, while other requests continue to the normal HTML page. Keep `public/index.md` in sync with the public homepage content when updating or removing content.
