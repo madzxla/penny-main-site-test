@@ -584,14 +584,13 @@ body.scrub-locked .pin {
 }
 
 .site-footer-inner {
-  max-width: 1200px;
   margin: 0 auto;
-  display: flex;
+  display: normal;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: #5f6560;
-  font-size: 14px;
+  color: #00000071;
+  font-size: 10px;
   line-height: 1.5;
   text-align: center;
 }
@@ -1293,6 +1292,14 @@ body.scrub-locked .pin {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+
+.home-download-badges {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+  margin-top: 5px;
 }
 
 .home-download-copy a img {

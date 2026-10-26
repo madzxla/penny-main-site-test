@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "../assets/logo.png";
+import GPBadge from "../assets/googleplaybadge.svg";
+import ASBadge from "../assets/appstorebadge.svg";
 import RigaVideo from "../assets/background.mp4";
 import "./Home.css";
 import ClaimSteps from "./ClaimSteps";
@@ -318,9 +320,14 @@ export default function VideoScrub() {
         <div className="home-download-inner">
           <div className="home-download-copy">
             <h1 className="cs-heading">Lejupielādē tagad</h1>
-            <a href="">
-              <img alt="Get it on Google Play" src="https://appure.io/badges/playstore/en.svg" height="60" />
-            </a>
+            <div className="home-download-badges">
+              <a href="">
+                <img alt="Iegūt pakalpojumā Google Play" src={GPBadge} height="50" />
+              </a>
+              <a href="">
+                <img alt="Lejupielādēt no App Store" src={ASBadge} height="50" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -333,7 +340,7 @@ export default function VideoScrub() {
 
       <footer className="site-footer">
         <div className="site-footer-inner">
-          <span>© 2026 Penny. Visas tiesības aizsargātas.</span>
+          <span><b>© 2026 Penny. Visas tiesības aizsargātas.</b><br />Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās valstīs.<br />Google Play ir Google LLC preču zīme.</span>
         </div>
       </footer>
     </>
