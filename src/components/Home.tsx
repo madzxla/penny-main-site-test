@@ -10,6 +10,7 @@ const SCRUB_DISTANCE = 2400;
 const ZOOM_DISTANCE = 900;
 const ZOOM_AMOUNT = 0.15;
 const ZOOM_MAX_RADIUS = 28;
+const TURNSTILE_SITE_KEY = "0x4AAAAAAFp4YLNFLElOLoy2";
 
 const FAQ_ITEMS = [
   {
@@ -80,10 +81,68 @@ export default function VideoScrub() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
 
   const [videoProgress, setVideoProgress] = useState(0);
   const [, setZoomProgress] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [newsletterMessage, setNewsletterMessage] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"success" | "error" | null>(null);
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [showTurnstile, setShowTurnstile] = useState(false);
+
+  useEffect(() => {
+    if (!showTurnstile) return;
+
+    const container = turnstileRef.current;
+    if (!container) return;
+
+    let widgetId: string | null = null;
+    const renderWidget = () => {
+      if (!window.turnstile || widgetId !== null) return;
+
+      widgetId = window.turnstile.render(container, {
+        sitekey: TURNSTILE_SITE_KEY,
+        action: "newsletter",
+        callback: (token) => {
+          setTurnstileToken(token);
+          setNewsletterMessage("");
+          setNewsletterStatus(null);
+        },
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+      turnstileWidgetIdRef.current = widgetId;
+    };
+
+    let script = document.querySelector<HTMLScriptElement>(
+      "script[data-turnstile-api]",
+    );
+
+    if (!script) {
+      script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.dataset.turnstileApi = "true";
+    }
+
+    script.addEventListener("load", renderWidget);
+    renderWidget();
+    if (!script.isConnected) {
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      script?.removeEventListener("load", renderWidget);
+      if (widgetId && window.turnstile) {
+        window.turnstile.remove(widgetId);
+      }
+      turnstileWidgetIdRef.current = null;
+    };
+  }, [showTurnstile]);
 
   const supportLines = [
     { start: 0, end: 0.45, text: "Bezmaksas ēdiens un izcilas atlaides" },
@@ -235,7 +294,7 @@ export default function VideoScrub() {
       <header className="topbar">
         <div className="topbar-inner">
           <div className="brand-wrap">
-            <img src={Logo} alt="Penny logo" className="brand-logo" />
+            <img src={Logo} alt="Penny" className="brand-logo" />
           </div>
 
           <nav className="topnav" aria-label="Main navigation">
@@ -340,7 +399,131 @@ export default function VideoScrub() {
 
       <footer className="site-footer">
         <div className="site-footer-inner">
-          <span><b>© 2026 Penny. Visas tiesības aizsargātas.</b><br />Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās valstīs.<br />Google Play ir Google LLC preču zīme.</span>
+          <div className="site-footer-legal">
+            <img src={Logo} alt="Penny" className="site-footer-logo" />
+            <p className="site-footer-copyright">
+              © 2026 Penny. Visas tiesības aizsargātas.
+            </p>
+            <p>
+              Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās
+              valstīs. Google Play ir Google LLC preču zīme.
+            </p>
+          </div>
+          <form
+            className="site-footer-newsletter"
+            onSubmit={async (event) => {
+              event.preventDefault();
+              const form = event.currentTarget;
+              const formData = new FormData(form);
+              const email = String(formData.get("email") ?? "");
+              if (!turnstileToken) {
+                setShowTurnstile(true);
+                setNewsletterStatus(null);
+                setNewsletterMessage(
+                  "Pabeidz drošības pārbaudi, pēc tam spied “Pieteikties”.",
+                );
+                return;
+              }
+
+              const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+              const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+              if (!supabaseUrl || !supabaseAnonKey) {
+                setNewsletterStatus("error");
+                setNewsletterMessage(
+                  "Pieteikšanās nav konfigurēta. Lūdzu, mēģini vēlāk.",
+                );
+                return;
+              }
+
+              setNewsletterSubmitting(true);
+              setNewsletterStatus(null);
+              setNewsletterMessage("");
+
+              try {
+                const response = await fetch(
+                  `${supabaseUrl.replace(/\/$/, "")}/functions/v1/newsletter-subscribe-test`,
+                  {
+                    method: "POST",
+                    headers: {
+                      apikey: supabaseAnonKey,
+                      Authorization: `Bearer ${supabaseAnonKey}`,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      email,
+                      termsConsent: formData.get("termsConsent") === "on",
+                      "cf-turnstile-response": turnstileToken,
+                    }),
+                  },
+                );
+                const result: { message?: string; error?: string } =
+                  await response.json();
+
+                if (!response.ok) {
+                  throw new Error(result.error ?? "Neizdevās pieteikties.");
+                }
+
+                setNewsletterMessage(
+                  result.message ?? "Pieteikums testa režīmā ir reģistrēts.",
+                );
+                setNewsletterStatus("success");
+                form.reset();
+              } catch (error) {
+                setNewsletterStatus("error");
+                setNewsletterMessage(
+                  error instanceof Error
+                    ? error.message
+                    : "Neizdevās pieteikties. Mēģini vēlreiz.",
+                );
+              } finally {
+                setTurnstileToken("");
+                if (turnstileWidgetIdRef.current && window.turnstile) {
+                  window.turnstile.reset(turnstileWidgetIdRef.current);
+                }
+                setNewsletterSubmitting(false);
+              }
+            }}
+          >
+            <label htmlFor="footer-newsletter-email">Saņem jaunumus</label>
+            <p className="site-footer-form-label">Mūsu mīļākie restorāni un piedāvājumi Rīgā, katru nedēļu tavā e-pastā.</p>
+            <div className="site-footer-form-row">
+              <input
+                id="footer-newsletter-email"
+                type="email"
+                name="email"
+                placeholder="Tavs e-pasts"
+                autoComplete="email"
+                required
+              />
+              <button type="submit" disabled={newsletterSubmitting}>
+                Pieteikties
+              </button>
+            </div>
+            {showTurnstile && (
+              <div className="site-footer-turnstile" ref={turnstileRef} />
+            )}
+            <label className="site-footer-consent">
+              <input type="checkbox" name="termsConsent" required />
+              <span>
+                Piekrītu lietošanas noteikumiem un privātuma politikai.
+              </span>
+            </label>
+            <p
+              className={`site-footer-newsletter-message${newsletterSubmitting ? " is-pending" : newsletterStatus ? ` is-${newsletterStatus}` : ""}`}
+              aria-live="polite"
+              role="status"
+            >
+              {(newsletterSubmitting || newsletterStatus) && (
+                <span className="site-footer-message-icon" aria-hidden="true" />
+              )}
+              <span>
+                {newsletterSubmitting
+                  ? "Lūdzu uzgaidiet..."
+                  : newsletterMessage}
+              </span>
+            </p>
+          </form>
         </div>
       </footer>
     </>

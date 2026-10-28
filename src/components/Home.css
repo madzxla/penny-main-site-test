@@ -208,7 +208,7 @@ body.scrub-locked .pin {
 
 .brand-logo {
   height: 26px;
-  width: auto;
+  width: fit-content;
   display: block;
 }
 
@@ -579,26 +579,198 @@ body.scrub-locked .pin {
 
 .site-footer {
   border-top: 1px solid rgba(29, 29, 31, 0.08);
-  background: rgba(255, 255, 255, 0.22);
-  padding: 18px 24px 28px;
+  padding: 32px 24px;
 }
 
 .site-footer-inner {
+  width: min(100%, 1120px);
   margin: 0 auto;
-  display: normal;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+  align-items: center;
+  gap: 48px;
+  color: #625f59;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.site-footer-legal p {
+  margin: 0;
+  font-size: 11px;
+}
+
+.site-footer-copyright {
+  margin-bottom: 6px !important;
+  color: #282724;
+  font-weight: 500;
+}
+
+.site-footer-newsletter label {
+  display: block;
+  margin-bottom: 10px;
+  color: #282724;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.site-footer-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.site-footer-form-label {
+  display: block;
+  margin-top: -7px;
+  margin-bottom: 10px;
+  color: #282724;
+  font-size: 11.5px;
+  font-weight: 400;
+}
+
+.site-footer-form-row input {
+  min-width: 0;
+  flex: 1;
+  height: 44px;
+  padding: 14px 14px;
+  border: 1px solid rgba(40, 39, 36, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.424);
+  color: #282724;
+  font-size: 13px;
+}
+
+.site-footer-form-row input:focus-visible,
+.site-footer-form-row button:focus-visible,
+.site-footer-consent input:focus-visible {
+  outline: 1px solid var(--penny-accent);
+}
+
+.site-footer-consent {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 0 0 !important;
+  color: #282724 !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-footer-turnstile {
+  min-height: 65px;
+  margin-top: 12px;
+}
+
+.site-footer-consent input {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  margin: 1px 0 0;
+  border-radius: 4px;
+  accent-color: var(--penny-accent);
+}
+
+.site-footer-form-row button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--penny-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.site-footer-form-row button:hover {
+  background: #df2929;
+}
+
+.site-footer-newsletter-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  min-height: 19px;
+  margin: 6px 0 0;
+  color: #282724;
+  font-size: 11px;
+}
+
+.site-footer-newsletter-message.is-pending {
+  color: #69635a;
+}
+
+.site-footer-newsletter-message.is-success {
+  color: #187447;
+}
+
+.site-footer-newsletter-message.is-error {
+  color: #b4232f;
+}
+
+.site-footer-message-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  color: #00000071;
+  margin-top: 1px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
   font-size: 10px;
-  line-height: 1.5;
-  text-align: center;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.is-success .site-footer-message-icon::before {
+  content: "✓";
+}
+
+.is-error .site-footer-message-icon::before {
+  content: "×";
+  font-size: 13px;
+}
+
+.is-pending .site-footer-message-icon {
+  border-color: currentColor currentColor currentColor transparent;
+  animation: site-footer-spinner 700ms linear infinite;
+}
+
+@keyframes site-footer-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-pending .site-footer-message-icon {
+    animation-duration: 1.8s;
+  }
 }
 
 .site-footer-logo {
-  width: 18px;
+  width: 88px;
   height: auto;
-  opacity: 0.8;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 28px 20px;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .site-footer-form-row {
+    flex-direction: column;
+  }
 }
 
 /* ---------- ClaimSteps merged into Home.css ---------- */
@@ -671,7 +843,7 @@ body.scrub-locked .pin {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--cs-card);
+  background: rgba(255, 255, 255, 0.424);
   border-radius: 28px;
   overflow: hidden;
   scroll-snap-align: start;
@@ -1204,7 +1376,7 @@ body.scrub-locked .pin {
 .home-faq-item {
   border: 1px solid rgba(29, 29, 31, 0.08);
   border-radius: 18px;
-  background: rgba(245, 245, 247, 0.7);
+  background: rgba(255, 255, 255, 0.424);
   overflow: hidden;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -1268,7 +1440,7 @@ body.scrub-locked .pin {
   justify-content: center;
   text-align: center;
   gap: 24px;
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.424);
   border: 1px solid rgba(29, 29, 31, 0.06);
   border-radius: 28px;
   padding: 40px 52px;
