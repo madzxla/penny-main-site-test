@@ -108,8 +108,10 @@ export default function VideoScrub() {
         action: "newsletter",
         callback: (token) => {
           setTurnstileToken(token);
-          setNewsletterMessage("");
           setNewsletterStatus(null);
+          setNewsletterMessage(
+            "Drošības pārbaude pabeigta, spied Pieteikties vēlreiz.",
+          );
         },
         "expired-callback": () => setTurnstileToken(""),
         "error-callback": () => setTurnstileToken(""),
@@ -420,7 +422,7 @@ export default function VideoScrub() {
                 setShowTurnstile(true);
                 setNewsletterStatus(null);
                 setNewsletterMessage(
-                  "Pabeidz drošības pārbaudi, pēc tam spied “Pieteikties”.",
+                  "Pabeidz drošības pārbaudi, pēc tam spied Pieteikties.",
                 );
                 return;
               }
