@@ -425,7 +425,7 @@ export default function VideoScrub() {
               Privātuma politika
             </a>
             <br /> <br />
-            <iframe src="https://status.getpenny.lv/badge?theme=light" width="230" height="30" frameBorder="0" scrolling="no" style={{colorScheme: "normal"}}></iframe>
+            <iframe src="https://status.getpenny.lv/lv/badge?theme=light" width="230" height="30" frameBorder="0" scrolling="no" style={{colorScheme: "normal"}}></iframe>
           </div>
           <form
             className="site-footer-newsletter"
