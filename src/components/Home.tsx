@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "../assets/logo.png";
+import AppLogo from "../assets/applogo.png";
 import GPBadge from "../assets/googleplaybadge.svg";
 import ASBadge from "../assets/appstorebadge.svg";
 import RigaVideo from "../assets/background.mp4";
@@ -380,6 +381,7 @@ export default function VideoScrub() {
       <section className="home-download" id="download">
         <div className="home-download-inner">
           <div className="home-download-copy">
+            <img src={AppLogo} alt="Penny" className="app-logo" />
             <h1 className="cs-heading">Lejupielādē tagad</h1>
             <div className="home-download-badges">
               <a href="">
@@ -404,12 +406,26 @@ export default function VideoScrub() {
           <div className="site-footer-legal">
             <img src={Logo} alt="Penny" className="site-footer-logo" />
             <p className="site-footer-copyright">
-              © 2026 Penny. Visas tiesības aizsargātas.
+              © {new Date().getFullYear()} Penny. Visas tiesības aizsargātas.
             </p>
             <p>
-              Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās
+              Mēs esam lepns Latvijas uzņēmums. Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās
               valstīs. Google Play ir Google LLC preču zīme.
             </p>
+            <br />
+            <a href="mailto:cau@getpenny.lv">
+              cau@getpenny.lv
+            </a>
+            <span aria-hidden="true"> · </span>
+            <a href="/terms">
+              Lietošanas noteikumi
+            </a>
+            <span aria-hidden="true"> · </span>
+            <a href="/privacy">
+              Privātuma politika
+            </a>
+            <br /> <br />
+            <iframe src="https://status.getpenny.lv/badge?theme=light" width="230" height="30" frameBorder="0" scrolling="no" style={{colorScheme: "normal"}}></iframe>
           </div>
           <form
             className="site-footer-newsletter"
@@ -487,8 +503,11 @@ export default function VideoScrub() {
               }
             }}
           >
-            <label htmlFor="footer-newsletter-email">Saņem jaunumus</label>
-            <p className="site-footer-form-label">Mūsu mīļākie restorāni un piedāvājumi Rīgā, katru nedēļu tavā e-pastā.</p>
+            <label className="site-footer-newsletter-heading" htmlFor="footer-newsletter-email">
+              <span className="site-footer-newsletter-heart" aria-hidden="true">❤️</span>
+              Saņem jaunumus
+            </label>
+            <p className="site-footer-form-label">Mūsu mīļākie restorāni un ēdienu pasākumi Rīgā, viss vienā e-pastā katru nedēļu.</p>
             <div className="site-footer-form-row">
               <input
                 id="footer-newsletter-email"
@@ -508,7 +527,7 @@ export default function VideoScrub() {
             <label className="site-footer-consent">
               <input type="checkbox" name="termsConsent" required />
               <span>
-                Piekrītu lietošanas noteikumiem un privātuma politikai.
+                Piekrītu Penny lietošānas noteikumiem un privātuma politikai
               </span>
             </label>
             <p

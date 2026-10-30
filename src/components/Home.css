@@ -3,7 +3,7 @@
 :root {
   --scrub-bg: #F2F1ED;
   --scrub-ink: #eaf2ee;
-  --scrub-muted: #8fa79c;
+  --scrub-muted: #171717;
   --scrub-accent: #ff3534;
   --penny-accent: #ff3534;
   --font-heading: "Protest Strike", sans-serif;
@@ -210,6 +210,12 @@ body.scrub-locked .pin {
   height: 26px;
   display: block;
 }
+
+.app-logo {
+  height: 64px;
+  display: block;
+}
+
 
 .brand-name {
   font-family: var(--font-heading);
@@ -599,6 +605,13 @@ body.scrub-locked .pin {
   font-size: 11px;
 }
 
+.site-footer-legal a {
+  margin: 0;
+  font-size: 11px;
+  color: #282724;
+  text-decoration: underline;
+}
+
 .site-footer-copyright {
   margin-bottom: 6px !important;
   color: #282724;
@@ -611,6 +624,18 @@ body.scrub-locked .pin {
   color: #282724;
   font-size: 15px;
   font-weight: 600;
+}
+
+.site-footer-newsletter .site-footer-newsletter-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.site-footer-newsletter-heart {
+  color: var(--penny-accent);
+  font-size: 13px;
+  line-height: 1;
 }
 
 .site-footer-form-row {
@@ -778,10 +803,10 @@ body.scrub-locked .pin {
   --cs-gutter: 100px;
   --cs-gap: 20px;
   --cs-card-w: clamp(300px, 75vw, 1260px);
-  --cs-ink: #1d1d1f;
-  --cs-muted: #6e6e73;
+  --cs-ink: #000000;
+  --cs-muted: #797979;
   --cs-card: #fffefb;
-  --cs-pill: #e8e8ed;
+  --cs-pill: #fffefb;
   --cs-ok: #1f9d55;
   --cs-accent: var(--penny-accent, #ff3534);
 
@@ -1442,7 +1467,7 @@ body.scrub-locked .pin {
   background: rgba(255, 255, 255, 0.424);
   border: 1px solid rgba(29, 29, 31, 0.06);
   border-radius: 28px;
-  padding: 40px 52px;
+  padding: 25px 52px;
 }
 
 .home-download-copy {
@@ -1454,7 +1479,7 @@ body.scrub-locked .pin {
 
 .home-download-copy h1.cs-heading {
   width: 100%;
-  margin: 0 0 20px;
+  margin: 20px 0 20px;
   padding: 0;
   text-align: center;
 }

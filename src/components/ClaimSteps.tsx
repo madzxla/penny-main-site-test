@@ -49,8 +49,8 @@ function MapVisual() {
         <i className="cs-pin on" style={{ top: 168, left: 96 }} />
       </div>
       <div className="cs-sheet">
-        <strong>Bezmaksas kapučīno</strong>
-        <span>Mārtiņa Kafija · 200m</span>
+        <strong aria-hidden="true">Bezmaksas kapučīno</strong>
+        <span aria-hidden="true">Mārtiņa Kafija · 200m</span>
       </div>
     </Phone>
   );
@@ -71,13 +71,15 @@ function DealVisual() {
         <span className="cs-badge">Bezmaksas</span>
       </div>
       <div className="cs-deal-body">
-        <p className="cs-deal-title">Bezmaksas kapučīno</p>
-        <p className="cs-deal-meta">Mārtiņa Kafija · 200m</p>
+        <p className="cs-deal-title" aria-hidden="true">Bezmaksas kapučīno</p>
+        <p className="cs-deal-meta" aria-hidden="true">
+          Mārtiņa Kafija · 200m
+        </p>
         <div className="cs-deal-row">
-          <span>Derīgs</span>
-          <span>šodien līdz 18:00</span>
+          <span aria-hidden="true">Derīgs</span>
+          <span aria-hidden="true">šodien līdz 18:00</span>
         </div>
-        <div className="cs-btn">
+        <div aria-hidden="true" className="cs-btn">
           Saņemt piedāvājumu
           <i className="cs-tap" />
         </div>
@@ -90,11 +92,17 @@ function VoucherVisual() {
   return (
     <Phone>
       <div className="cs-voucher">
-        <p className="cs-label">Tavs kods</p>
+        <p className="cs-label" aria-hidden="true">Tavs kods</p>
         <CodeBoxes />
-        <span className="cs-timer">Derīgs vēl 01:59:42</span>
-        <p className="cs-voucher-deal">Bezmaksas kapučīno</p>
-        <p className="cs-hint">Uzrādi šo kodu darbiniekam</p>
+        <span className="cs-timer" aria-hidden="true">
+          Derīgs vēl 01:59:42
+        </span>
+        <p className="cs-voucher-deal" aria-hidden="true">
+          Bezmaksas kapučīno
+        </p>
+        <p className="cs-hint" aria-hidden="true">
+          Uzrādi šo kodu darbiniekam
+        </p>
       </div>
     </Phone>
   );
@@ -108,9 +116,11 @@ function StaffVisual() {
         <span>Mārtiņa Kafija</span>
       </div>
       <div className="cs-tablet-body">
-        <p className="cs-label">Ievadi klienta kodu</p>
+        <p className="cs-label" aria-hidden="true">Ievadi klienta kodu</p>
         <CodeBoxes large />
-        <div className="cs-btn cs-btn-inline">Apstiprināt</div>
+        <div className="cs-btn cs-btn-inline" aria-hidden="true">
+          Apstiprināt
+        </div>
       </div>
     </div>
   );
@@ -125,9 +135,13 @@ function DoneVisual() {
             <path d="M5 12.5l4.5 4.5L19 7.5" />
           </svg>
         </div>
-        <p className="cs-done-title">Apstiprināts</p>
-        <p className="cs-voucher-deal">Bezmaksas kapučīno</p>
-        <p className="cs-hint">Mārtiņa Kafija · kods 48205</p>
+        <p className="cs-done-title" aria-hidden="true">Apstiprināts</p>
+        <p className="cs-voucher-deal" aria-hidden="true">
+          Bezmaksas kapučīno
+        </p>
+        <p className="cs-hint" aria-hidden="true">
+          Mārtiņa Kafija · kods 48205
+        </p>
       </div>
     </Phone>
   );
