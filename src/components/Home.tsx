@@ -408,6 +408,20 @@ export default function VideoScrub() {
             <p className="site-footer-copyright">
               © {new Date().getFullYear()} Penny. Visas tiesības aizsargātas.
             </p>
+            <nav className="site-footer-social" aria-label="Sociālie tīkli">
+              <a href="https://www.facebook.com/getpenny.lv/" target="_blank" rel="noreferrer" aria-label="Penny Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z" /></svg>
+              </a>
+              <a href="https://www.instagram.com/getpenny.lv/" target="_blank" rel="noreferrer" aria-label="Penny Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle className="site-footer-social-dot" cx="17.7" cy="6.5" r="1" /></svg>
+              </a>
+              <a href="https://www.tiktok.com/@getpenny.lv" target="_blank" rel="noreferrer" aria-label="Penny TikTok">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.5 3.5 3.4 3.7v3.2a8.4 8.4 0 0 1-3.4-.9v6.2a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.2.1v3.4a2.8 2.8 0 1 0 1.6 2.6V3h3.3Z" /></svg>
+              </a>
+              <a href="https://x.com/getpenny_lv" target="_blank" rel="noreferrer" aria-label="Penny on X">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H22l-6.8 7.8L23.2 21h-6.3L12 14.8 6.5 21H3.4l7.3-8.4L2.8 3h6.4l4.4 5.8L18.9 3Zm-1.1 16h1.7L8.3 4.9H6.5L17.8 19Z" /></svg>
+              </a>
+            </nav>
             <p>
               Mēs esam lepns Latvijas uzņēmums. Apple un App Store ir Apple Inc. reģistrēti zīmoli ASV un citās
               valstīs. Google Play ir Google LLC preču zīme.
