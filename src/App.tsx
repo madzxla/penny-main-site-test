@@ -40,6 +40,36 @@ function App() {
     );
   }
 
+  if (path === "/ai-privacy") {
+    return (
+      <LegalPage
+        title="MI privātuma politika"
+        introduction="Pēdējo reizi atjaunots 2026. gada 15. novembrī.
+
+        Šeit tiks aprakstīts, kā Penny (turpmāk ''mēs'') vāc, izmanto un glabā personas datus saistībā ar mākslīgā intelekta (MI) lietojumu.
+        Šī privātuma politika attiecas uz mūsu partneru portālu, kas ir pieejams vietnē app.getpenny.lv.
+
+        <b>1. Datu pārstrāde</b>
+         Mēs izmantojam norādītos ārpus pakalpojumu sniedzējus, lai piedāvātu mūsu MI pakalpojumus.
+         · <b>Google</b> - Piedāvājumu izveides palīdzībai un ieteikumiem, izmantojot Gemma 4 26B A4B modeli, bet dienas pārskata izveidei, Gemma 4 31B modeli
+         · <b>Perplexity</b> - Piedāvājumu izveides palīdzībai un ieteikumiem, izmantojot Decider Flash V1.3 modeli
+
+        <b>2. MI trenēšana</b>
+          Neviens no ārpus pakalpojuma sniedzējiem neizmanto Jūsu restorāna datus, lai trenētu savus MI modeļus. Google iespējams saglabā nelielu daudzumu datus īslaicīgi, bet tas netiek izmantots MI modeļu trenēšanai.
+
+        <b>3. Atteikšanās</b>
+          Atteikties no MI pakalpojumiem ir iespējams patnera portālā, sekcijā Iestatījumi > MI. Pārvaldiet visas MI funkcijas ērtā veidā. Pēc noklusējuma, MI funkcijas ir izslēgtas.
+
+        <b>4. Izmaiņas MI privātuma politikā</b>
+          Mēs paturam tiesības mainīt šo MI privātuma politiku jebkurā laikā. Izmaiņas stāsies spēkā pēc to publicēšanas vietnē. Lietotāji tiek aicināti regulāri pārskatīt MI privātuma politiku, lai būtu informēti par jebkādām izmaiņām.
+
+        <b>5. Kontaktēt mūs</b>
+          Ja Jums ir jebkādi jautājumi par MI lietojumu mūsu partneru portālā, mēs lūdzam Jums sazināties ar mums caur e-pasta adresi legal@getpenny.lv vai caur Jūsu konta speciālistu. (Iestatījumi > Atbalsts)
+        "
+      />
+    );
+  }
+
   if (path === "/terms") {
     return (
       <LegalPage
