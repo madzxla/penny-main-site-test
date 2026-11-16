@@ -57,13 +57,18 @@ function App() {
         <b>2. MI trenēšana</b>
           Neviens no ārpus pakalpojuma sniedzējiem neizmanto Jūsu restorāna datus, lai trenētu savus MI modeļus. Google iespējams saglabā nelielu daudzumu datus īslaicīgi, bet tas netiek izmantots MI modeļu trenēšanai.
 
-        <b>3. Atteikšanās</b>
-          Atteikties no MI pakalpojumiem ir iespējams patnera portālā, sekcijā Iestatījumi > MI. Pārvaldiet visas MI funkcijas ērtā veidā. Pēc noklusējuma, MI funkcijas ir izslēgtas.
+        <b>3. Datu izmantošana</b>
+          Atkarīgā kādus pakalpojumus Jūs izmantojat, mēs izmantojam sekojošos restorāna datus, lai nodrošinātu mūsu MI pakalpojumus:
+          · Piedāvājumu nosaukums, attēls, tips, aktīvie laiki un detalizēta apstiprinājumu un skatījumu informācija
+          · Restorāna nosaukums, atrašanās vieta un darba laiks
+          
+        <b>4. Atteikšanās</b>
+          Atteikties no MI pakalpojumiem ir iespējams patnera portālā, sekcijā Iestatījumi > MI. Pēc noklusējuma, mūsu standarta funkcijas ir ieslēgtas automātiski, bet tās ir iespējams izslēgt jebkurā brīdī.
 
-        <b>4. Izmaiņas MI privātuma politikā</b>
+        <b>5. Izmaiņas MI privātuma politikā</b>
           Mēs paturam tiesības mainīt šo MI privātuma politiku jebkurā laikā. Izmaiņas stāsies spēkā pēc to publicēšanas vietnē. Lietotāji tiek aicināti regulāri pārskatīt MI privātuma politiku, lai būtu informēti par jebkādām izmaiņām.
 
-        <b>5. Kontaktēt mūs</b>
+        <b>6. Kontaktēt mūs</b>
           Ja Jums ir jebkādi jautājumi par MI lietojumu mūsu partneru portālā, mēs lūdzam Jums sazināties ar mums caur e-pasta adresi legal@getpenny.lv vai caur Jūsu konta speciālistu. (Iestatījumi > Atbalsts)
         "
       />
